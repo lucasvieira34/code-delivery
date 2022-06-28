@@ -12,6 +12,8 @@ services:
       - .:/home/node/app
     depends_on:
       - db
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
   
   db:
     image: mongo:4.4.4
@@ -37,3 +39,8 @@ services:
       - ME_CONFIG_MONGODB_ADMINPASSWORD=root
     depends_on:
       - db
+
+networks:
+  default:
+    name: kafka_default
+    external: true
